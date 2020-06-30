@@ -37,11 +37,21 @@ const pets = [
   }
 ]
 
-const petsAgeWeight = pets.reduce((total, pet) => { 
-  return {
-    totalAge: total.totalAge + pet.age,
-    totalWeight: total.totalWeight + pet.weight
-  }
-}, { totalAge: 0, totalWeight:0 })
+const dogsWeight = pets
+  .filter((pet) => pet.type === 'dog')
+  .reduce((total, pet) => {
+    return total += pet.weight
+  }, 0)
 
-console.log('petsAgeWeight - ', petsAgeWeight)
+console.log('dogsWeight - ', dogsWeight)
+
+// geralmente quando há a necessidade de usar o map e filter
+// juntos da para fazer com Reduce
+
+const totalWeightDog = pets.reduce((total, pet) => {
+  if (pet.type !== 'dog') return total
+
+  return total + pet.weight
+}, 0)
+
+console.log('totalWeightDog - ', totalWeightDog)
